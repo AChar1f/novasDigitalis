@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     next()
   })
   app.use('/users', userRouter)
-  app.use('items', productRouter)
+  app.use('/items', productRouter)
   app.use(
     express.static("./static"),
     express.json(),

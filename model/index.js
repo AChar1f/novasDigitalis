@@ -1,4 +1,4 @@
-import { Products } from './Products,js'
+import { Products } from './Products.js'
 import { Users } from './User.js'
 
 const products = new Products()

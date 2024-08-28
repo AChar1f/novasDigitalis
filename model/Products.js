@@ -4,11 +4,11 @@ class Products {
     fetchProducts(req, res) {
         try {
             const strQry = `
-            select productID, prodName, category, prodDescription, prodURL, amount 
+            select prodID, prodName, category, prodDescription, prodURL, amount 
             from Products;
             `
             db.query(strQry, (err, results) => {
-                if(err) throw new Error('Issue when retrieving all products')
+                if(err) throw new Error(err)
             res.json({
                 status: res.statusCode,
                 results
@@ -25,9 +25,9 @@ class Products {
     fetchProduct(req, res) {
         try {
             const strQry = `
-            select productID, prodName, category, prodDescription, amount 
+            select prodID, prodName, category, prodDescription, amount 
             from Products
-            where productID = ${req.params.id}; 
+            where prodID = ${req.params.id}; 
             `
             db.query(strQry, (err, result) => {
                 if(err) throw new Error(err.message)
@@ -47,8 +47,8 @@ class Products {
     recentProducts(req , res) {
         try {
             const strQry = `
-            select productID, prodName, category, prodDescription, prodURL, amount 
-            from Products order by productID desc limit 4;
+            select prodID, prodName, category, prodDescription, prodURL, amount 
+            from Products order by prodID desc limit 4;
             `
            db.query(strQry, (err, results) => {
             if(err) throw new Error('Unable to fetch recent product data.')
@@ -93,7 +93,7 @@ class Products {
             const strQry = `
             update Products
             set ? 
-            where productID = ${req.params.id}
+            where prodID = ${req.params.id}
             `
             db.query(strQry, [data], (err) => {
                 if(err) throw new Error('Unable to update product.')
@@ -114,7 +114,7 @@ class Products {
         try {
             const strQry = ` 
             delete from Products
-            where productID = ${req.params.id}
+            where prodID = ${req.params.id}
             `
             db.query(strQry, (err) => {
                 if(err) throw new Error('Ran into issues while trying to delete product, please review delete query.')
