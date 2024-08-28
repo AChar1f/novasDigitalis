@@ -1,8 +1,8 @@
 import path from 'path'
-import express from 'express'
+import { userRouter, express } from './controller/userController.js'
+import { productRouter } from './controller/ProductController.js'
 import cors from 'cors'
-import { config } from 'dotenv' 
-config()
+
 // Express App
 const app = express()
 const port = +process.env.PORT || 4000
@@ -18,6 +18,8 @@ app.use((req, res, next) => {
     res.header("Access-Control-Expose-Headers", "Authorization")
     next()
   })
+  app.use('/users', userRouter)
+  app.use('items', productRouter)
   app.use(
     express.static("./static"),
     express.json(),
