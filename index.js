@@ -1,7 +1,8 @@
 import path from 'path'
 import express from 'express'
 import cors from 'cors'
-
+import { config } from 'dotenv' 
+config()
 // Express App
 const app = express()
 const port = +process.env.PORT || 4000
