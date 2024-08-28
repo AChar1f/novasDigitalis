@@ -1,7 +1,9 @@
 Signing In
 
-12:45 : Getting Postman
+14:45 : Getting Postman
 
-12:56 : Postman Download completed
+14:56 : Postman Download completed
 
-12:58 : Postman installation failed, Retrying...
+14:58 : Postman installation failed, Retrying...
+
+15:25 : Postman install and signing complete.
