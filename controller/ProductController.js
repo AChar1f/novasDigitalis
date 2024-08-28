@@ -22,6 +22,10 @@ productRouter.post('/addProduct', (req, res) => {
 })
 
 productRouter.patch('/update/:id', (req, res) => {
+    products.updateProduct(req, res)
+})
+
+productRouter.delete('/delete/:id', (req, res) => {
     products.deleteProduct(req, res)
 })
 

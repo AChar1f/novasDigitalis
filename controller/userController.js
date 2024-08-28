@@ -13,7 +13,7 @@ userRouter.get('/:id', (req, res) => {
     users.fetchUser(req, res)
 })
 
-userRouter.post('/update/:id', (req, res) => {
+userRouter.patch('/update/:id', (req, res) => {
     users.updateUser(req, res)
 })
 
