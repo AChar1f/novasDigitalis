@@ -1,6 +1,7 @@
 import path from 'path'
 import { userRouter, express } from './controller/userController.js'
 import { productRouter } from './controller/ProductController.js'
+import { errorHandling } from './middleware/ErrorHandling.js'
 import cors from 'cors'
 
 // Express App
@@ -39,6 +40,7 @@ app.get('*', (req, res) => {
         msg: '❌ Resource not found.'
     })
 })
+app.use(errorHandling)
 app.listen(port, () => {
     console.log(`Live on port: ${port}`)
 })
