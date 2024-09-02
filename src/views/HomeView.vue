@@ -6,11 +6,10 @@
 
 <script>
 
-
 export default {
   name: 'HomeView',
   components: {
-
+    
   },
   // computed: {
   //   users() {
