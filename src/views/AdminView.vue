@@ -82,7 +82,7 @@
 <div v-if="showAddProductForm" class="modal-overlay">
 <div class="modal-content">
   <h3>Add New Product</h3>
-  <input v-model="newProduct.prodUrl" type="text" placeholder="Product URL">
+  <input v-model="newProduct.prodURL" type="text" placeholder="Product URL">
   <input v-model="newProduct.prodName" type="text" placeholder="Product Name">
   <input v-model="newProduct.prodDescription" type="text" placeholder="Description">
   <input v-model="newProduct.category" type="text" placeholder="Category">
