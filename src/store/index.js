@@ -80,7 +80,7 @@ export default createStore({
 
     async register(context, payload) {
       try {
-        const { msg, err } = await(await axios.get(`${apiURL}users/register`, payload)).data
+        const { msg, err } = await(await axios.post(`${apiURL}users/register`, payload)).data
         if (msg) {
           context.dispatch('fetchUser')
           toast.success(`${msg}`, {
@@ -103,7 +103,7 @@ export default createStore({
 
     async updateUser(context, payload) {
       try {
-        const { msg, err} = await(await axios.get(`${apiURL}users/update/${payload.userID}`)).data
+        const { msg, err} = await(await axios.patch(`${apiURL}users/update/${payload.userID}`)).data
         if (msg) {
           context.dispatch('fetchUsers')
             toast.success(`${msg}`, {
@@ -126,7 +126,7 @@ export default createStore({
 
     async deleteUser(context, userID) {
       try {
-        const { msg, err } = await(await axios.get(`${apiURL}users/delete/${userID}`)).data
+        const { msg, err } = await(await axios.delete(`${apiURL}users/delete/${userID}`)).data
         if (msg) {
           context.dispatch('fetchUsers')
           toast.success(`${msg}`, {
@@ -208,7 +208,7 @@ export default createStore({
 
     async addProduct(context, payload) {
       try {
-        const { msg } = await(await axios.get(`${apiURL}items/addProduct`, payload)).data
+        const { msg } = await(await axios.post(`${apiURL}items/addProduct`, payload)).data
         if (msg) {
           context.dispatch('fetchProducts')
           toast.success(`${msg}`, {
@@ -226,7 +226,7 @@ export default createStore({
 
     async updateProduct(context, payload) {
       try {
-        const { msg } = await(await axios.get(`${apiURL}items/update/${payload.prodID}`, payload)).data
+        const { msg } = await(await axios.patch(`${apiURL}items/update/${payload.prodID}`, payload)).data
         if (msg) {
           context.dispatch('fetchProducts')
           toast.success(`${msg}`, {
@@ -244,7 +244,7 @@ export default createStore({
 
     async deleteProduct(context, prodID) {
       try {
-        const { msg } = await(await axios.get(`${apiURL}items/delete/${prodID}`)).data
+        const { msg } = await(await axios.delete(`${apiURL}items/delete/${prodID}`)).data
         if (msg) {
           context.dispatch('fetchProducts')
           toast.success(`${msg}`, {
