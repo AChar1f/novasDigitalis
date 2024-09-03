@@ -73,7 +73,7 @@ class Products {
             set ?;
             `
             db.query(strQry, [data], (err) => {
-                if(err) throw new Error('Unable to add product')
+                if(err) throw new Error(err.message)
                 res.json({
                     status: res.statusCode,
                     msg: 'Product added successfully.'
