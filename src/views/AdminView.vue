@@ -1,5 +1,5 @@
 <template>
-<section class="container-fluid admin-section">      
+<div class="container-fluid admin-section">      
 <div class="row  pt-4">
   <h2 class="headings ">Users</h2>
 </div>
@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<table class="table">
+<table class="table table-responsive">
   <thead>
     <tr>
       <th>Profile</th>
@@ -93,7 +93,7 @@
 </div>
 </div>
 
-<table class="table products-table ">
+<table class="table products-table table-responsive mb-4">
 <thead>
   <tr>
     <th>Product</th>
@@ -137,7 +137,7 @@
   <button class="btn mt-1 mb-1" @click="closeUpdateProductModal">Cancel</button>
 </div>
 </div>
-</section>
+</div>
 
 </template>
 
@@ -253,19 +253,6 @@ table img {
 }
 
 
-.admin-tables {
-  margin: 20px;
-}
-
-.table {
-  width: 100% !important;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  overflow-x: auto; 
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
 .table th,
 .table td {
   border: 1px solid white;
@@ -305,7 +292,6 @@ button {
   padding: 10px;
   background-color: #FFA500;
   border: 1px solid black;
-  cursor: pointer;
   border-radius: 5px;
 }
 
@@ -330,6 +316,7 @@ button {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1001;
   width: 30%;
+  min-width: 18rem;
 }
 
 .modal-content input {
@@ -347,8 +334,9 @@ button {
   position: relative;
   z-index: 2; 
   padding: 20px;
-  background-color: #2C2C2C;
+  background-color: #2c2c2cbc;
   width: 100vw;
+  min-height: 85vh;
 }
 
 @media (max-width: 1350px) {
@@ -410,10 +398,6 @@ button {
     font-size: 1rem;
   }
 
-  .admin-section {
-    margin-top: 15rem !important;
-  }
-
 }
 
 
@@ -423,9 +407,6 @@ button {
     font-size: 0.9rem; 
   }
 
-  .admin-section {
-    margin-top: 12rem !important;
-  }
 
   table button {
     width: 3.5rem;
@@ -448,10 +429,6 @@ button {
   table button {
     width: 3.5rem;
     font-size: 0.7rem;
-  }
-
-  .admin-section {
-    margin-top: 9rem !important;
   }
 }
 </style>

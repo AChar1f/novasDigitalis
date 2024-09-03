@@ -23,6 +23,7 @@ footer {
     background-color: #2C3E50;
     color: #D3D3D3;
     min-height: 2rem;
+    max-width: 100vw;
     align-content: center;
 }
 
