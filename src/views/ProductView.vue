@@ -11,7 +11,7 @@
                     <p>{{ product.prodDescription }}</p>
                     <p class="lead">R{{ product.amount }}</p>
                     <div class="buttons">
-                        <router-link :to="{name: 'item', params: {id: product.prodID} }">
+                        <router-link :to="`/item/${product.prodID}`">
                             <button>See More...</button>
                         </router-link>
                     </div>
