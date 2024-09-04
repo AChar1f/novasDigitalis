@@ -25,7 +25,7 @@ class Products {
     fetchProduct(req, res) {
         try {
             const strQry = `
-            select prodID, prodName, category, prodDescription, amount 
+            select prodID, prodName, category, prodDescription, amount, prodURL
             from Products
             where prodID = ${req.params.id}; 
             `
