@@ -1,7 +1,7 @@
-<!-- <template>
-    <div>
+<template>
+    <div class="container-fluid">
         <h2>This is the Item View</h2>
-        <div v-if="product">
+        <div v-if="product" class="row justify-content-center">
             <CardComp>
                 <template #cardHeader>
                     <img :src="product.prodURL" loading="lazy" class="img-fluid" :alt="product.prodName">
@@ -18,6 +18,9 @@
 </template>
 
 <script>
+import store from '@/store'
+console.log(store.state.product);
+
 import CardComp from '../components/Card.vue'
 import Spinner from '../components/Spinner.vue'
 
@@ -25,7 +28,7 @@ import Spinner from '../components/Spinner.vue'
         name: 'ItemView',
         components: {
             CardComp, Spinner
-        },
+         },
         computed: {
             product() {
                 return this.$store.state.product
@@ -35,6 +38,8 @@ import Spinner from '../components/Spinner.vue'
             }
         },
         mounted() {
+            console.log(this.productId);
+            
             this.$store.dispatch('fetchProduct', this.productId)
         }
     
@@ -43,6 +48,8 @@ import Spinner from '../components/Spinner.vue'
 </script>
 
 <style scoped>
+.container-fluid{
+    min-height: 85vh;
+}
 
-
-</style> -->
+</style>
