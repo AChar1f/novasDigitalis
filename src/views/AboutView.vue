@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid about-cont">
-    <div class="container">
+    <div class="container text-align-center">
       <h1>About Us</h1>
       <ul>
         <li>
@@ -37,15 +37,18 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  /* align-content: center; */
+  align-content: center;
 }
 .container {
   backdrop-filter: brightness(65%);
+  padding-block: 0.5rem;
+  text-align: center;
 }
+
 
 ul li {
   list-style: none;
-  margin-block: 2rem;
+  margin-top: 1rem;
   
 }
 </style>

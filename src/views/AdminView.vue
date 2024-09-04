@@ -317,6 +317,7 @@ button {
   z-index: 1001;
   width: 30%;
   min-width: 18rem;
+  color: #2C3E50;
 }
 
 .modal-content input {
@@ -324,6 +325,7 @@ button {
   margin-bottom: 0.3rem;
   border-radius: 4px 4px 4px 4px;
   border: 1px solid rgba(0, 0, 0, 0.3);
+  padding-inline: 0.3rem;
 }
 
 .headings {
@@ -334,7 +336,6 @@ button {
   position: relative;
   z-index: 2; 
   padding: 20px;
-  background-color: #2c2c2cbc;
   width: 100vw;
   min-height: 85vh;
 }
