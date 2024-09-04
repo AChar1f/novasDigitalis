@@ -2,8 +2,14 @@ import { createStore } from 'vuex'
 import axios from 'axios'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
+import router from '@/router'
+import { useCookies } from 'vue3-cookies'
+const {cookies} = useCookies()
+import { applyToken } from '@/service/VerfiedUser.js'
 
 const apiURL = 'https://novasdigitalis.onrender.com/'
+
+applyToken(cookies.get('VerifiedUser')?.token)
 
 export default createStore({
   state: {
@@ -147,6 +153,35 @@ export default createStore({
       }
     },
 
+    async login(context, payload) {
+      try {
+        const { msg, result, token } = await (await axios.post(`${apiURL}users/login`, payload)).data
+        if (result) {
+          toast.success(`${msg}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          })
+          context.commit('setUser', {
+            msg,
+            result
+          })
+          cookies.set('VerifiedUser', {token, msg, result})
+          applyToken(token)
+          router.push({ name: 'products' })
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: 'bottom-center'
+        })
+      }
+    },
+    
     // Products
 
     async fetchProducts(context) {
