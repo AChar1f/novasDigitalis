@@ -93,7 +93,7 @@ class Users {
             where userID = ${req.params.id}
             `;
       db.query(strQry, [data], (err) => {
-        if (err) throw new Error(err);
+        if (err) throw new Error(err.message);
         res.json({
           status: res.statusCode,
           msg: 'User details updated successfully 🔄',
@@ -171,7 +171,76 @@ class Users {
       })
     }
   }
-}
+
+//   fetchCart(req, res) {
+//     try {
+//     const userID = req.params.id;
+
+//      const strQry = `
+//     SELECT p.id, p.name, p.price, o.quantity
+//     FROM Orders o
+//     JOIN Products p ON o.prodID = p.id
+//     WHERE o.userID = ?
+//   `;
+//   db.query(strQry, [userID], (err, results) => {
+//     if (err) return res.status(500).json({ message: 'Database error' });
+//     res.status(200).json(results);
+//   })
+
+//     } catch (e) {
+//       res.json({
+//         status: 404,
+//         msg: e.message
+//       })
+//     }
+//   }
+
+//   updateCart(req, res) {
+//     try {
+//       const userID= req.params.id;
+//   const prodID = req.params.prodID;
+//   const { quantity } = req.body;
+
+//   if (!quantity) {
+//     return res.status(400).json({ message: 'Quantity is required' });
+//   }
+
+//   const strQry = `
+//     UPDATE carts
+//     SET quantity = ?
+//     WHERE userID = ? AND prodID = ?
+//   `;
+//   db.query(strQry, [quantity, userID, prodID], (err, result) => {
+//     if (err) return res.status(500).json({ message: 'Database error' });
+//     res.status(200).json(result, { message: 'Cart updated' });
+//   }) 
+//     } catch (e) {
+//       res.json({
+//         status: 404,
+//         msg: e.message
+//       })
+//     }
+//   }
+
+//   deleteCart(req, res) {
+//     try {
+//       const userID = req.params.id;
+//   const prodID = req.params.prodID;
+
+//   const strQry = `
+//     DELETE FROM carts
+//     WHERE userID = ? AND prodID = ?
+//   `;
+
+//   db.query(strQry, [userID, prodID], (err, result) => {
+//     if (err) return res.status(500).json({ message: 'Database error' });
+//     res.status(200).json({ message: 'Cart item deleted' });
+//   });
+//     } catch (e) {
+      
+//     }
+//   }
+// }
 
 export { 
     Users 
