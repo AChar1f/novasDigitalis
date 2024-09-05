@@ -240,7 +240,7 @@ class Users {
       
 //     }
 //   }
-// }
+}
 
 export { 
     Users 
