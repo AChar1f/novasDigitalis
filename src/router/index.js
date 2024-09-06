@@ -47,6 +47,11 @@ const routes = [
     name: 'item',
     component: () => import ('../views/ItemView.vue')
   }
+  // {
+  //   path: '/profile',
+  //   name: 'profile',
+  //   component: () => import ('../views/UserProfileView.vue')
+  // }
 ]
 
 const router = createRouter({
