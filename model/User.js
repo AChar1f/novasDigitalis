@@ -63,7 +63,7 @@ class Users {
         if (err) {
           res.json({
             status: res.statusCode,
-            msg: "This email has already been taken",
+            error: "This email has already been taken",
           });
         } else {
           const token = createToken(user);
@@ -96,13 +96,14 @@ class Users {
           if (error) throw new Error(error.message);
 
             if (req.body.userPass == result[0].userPass) {
-
+              console.log('same pwd');
+              
               const Query = `
                 update Users
                 set ?
                 where userID = ${req.params.id}
                 `;
-
+              
               db.query(Query, [data], (err) => {
                 if (err) throw new Error(err.message);
                 res.json({
@@ -113,7 +114,11 @@ class Users {
               return 'same pwd'
 
             } else{
+              console.log(req.body.userPass);
+              console.log(result[0].userPass);
+
               data.userPass = await hash(data.userPass, 12)
+
 
               const Query = `
                 update Users
