@@ -92,7 +92,8 @@ export default createStore({
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: 'bottom-center'
-          })
+          }) 
+          // router.push({ name: 'login'})
         } else {
             toast.error(`${err}`, {
             autoClose: 2000,
@@ -168,7 +169,7 @@ export default createStore({
           })
           cookies.set('VerifiedUser', {token, msg, result})
           applyToken(token)
-          router.push({ name: 'products' })
+          router.push({ name: 'profile' })
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
