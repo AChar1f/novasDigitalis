@@ -108,8 +108,9 @@ export default createStore({
     },
 
     async updateUser(context, payload) {
+      console.log(payload);
       try {
-        const { msg, err} = await(await axios.patch(`${apiURL}users/update/${payload.userID}`)).data
+        const { msg, err} = await(await axios.patch(`${apiURL}users/update/${payload.userID}`, payload)).data
         if (msg) {
           context.dispatch('fetchUsers')
             toast.success(`${msg}`, {

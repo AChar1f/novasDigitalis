@@ -4,11 +4,11 @@
         <h2>Login In</h2>
       <span class="input-span">
         <label for="email" class="label">Email</label>
-        <input type="email" name="email" id="email" v-model="payload.emailAdd"
+        <input type="email" name="email" id="email" v-model="payload.emailAdd" required minlength="13"
       /></span>
       <span class="input-span">
         <label for="password" class="label">Password</label>
-        <input type="password" name="password" id="password" v-model="payload.userPass"  minlength="6" required
+        <input type="password" name="password" id="password" v-model="payload.userPass"  minlength="4" required
       /></span>
       <input class="submit" type="submit" value="Log in" />
       <span class="span">Don't have an account? <router-link to="/register">Register</router-link></span>
