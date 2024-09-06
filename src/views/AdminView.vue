@@ -7,7 +7,7 @@
 
 <!-- Add User Form -->
 <div v-if="showAddUserForm" class="modal-overlay">
-  <div class="modal-content">
+  <form class="modal-content">
     <h3>Add New User</h3>
     <input v-model="newUser.userProfile" type="text" placeholder="Profile URL">
     <input v-model="newUser.firstName" type="text" placeholder="First Name">
@@ -16,9 +16,9 @@
     <input v-model="newUser.gender" type="text" placeholder="Gender">
     <input v-model="newUser.emailAdd" type="email" placeholder="Email">
     <input v-model="newUser.userPass" type="password" placeholder="Password">
-    <button class="btn mt-1 mb-1" @click="addUser">Submit</button>
+    <button class="btn mt-1 mb-1" @click.prevent="addUser">Submit</button>
     <button class="btn mt-1 mb-1" @click="showAddUserForm = false">Cancel</button>
-  </div>
+  </form>
 </div>
 
 <table class="table table-responsive">
@@ -36,7 +36,7 @@
   </tr>
 </thead>
 <tbody>
-  <tr v-for="user in users" :key="user.ID">
+  <tr v-for="(user, userID) in users" :key="userID">
     <td> <img :src="user.userProfile " alt="profile"></td>
     <td>{{ user.userID }}</td>
     <td>{{ user.firstName }}</td>
@@ -55,7 +55,7 @@
 
 <!-- Update User Modal -->
 <div v-if="showUpdateUserModal" class="modal-overlay">
-<div class="modal-content">
+<form class="modal-content">
   <h3>Update User</h3>
   <input v-model="currentUser.userProfile" type="text" placeholder="Profile URL">
   <input v-model="currentUser.firstName" type="text" placeholder="First Name">
@@ -64,9 +64,9 @@
   <input v-model="currentUser.gender" type="text" placeholder="Gender">
   <input v-model="currentUser.emailAdd" type="email" placeholder="Email">
   <input v-model="currentUser.userPass" type="password" placeholder="Password">
-  <button class="btn mt-1 mb-1" @click="updateUser(currentUser)">Save changes</button>
+  <button class="btn mt-1 mb-1" @click.prevent="updateUser(currentUser)">Save changes</button>
   <button class="btn mt-1 mb-1" @click="closeUpdateUserModal">Cancel</button>
-</div>
+</form>
 </div>
 
 
@@ -80,7 +80,7 @@
 
 <!-- Add Product Form -->
 <div v-if="showAddProductForm" class="modal-overlay">
-<div class="modal-content">
+<form class="modal-content" @submit.prevent="addUser">
   <h3>Add New Product</h3>
   <input v-model="newProduct.prodURL" type="text" placeholder="Product URL">
   <input v-model="newProduct.prodName" type="text" placeholder="Product Name">
@@ -90,7 +90,7 @@
   <input v-model="newProduct.quantity" type="text" placeholder="Quantity">
   <button class="btn mt-1 mb-1" @click="addProduct">Submit</button>
   <button class="btn mt-1 mb-1" @click="showAddProductForm = false">Cancel</button>
-</div>
+</form>
 </div>
 
 <table class="table products-table table-responsive mb-4">
@@ -125,7 +125,7 @@
 
 <!-- Update Product Modal -->
 <div v-if="showUpdateProductModal" class="modal-overlay">
-<div class="modal-content">
+<form class="modal-content" @submit.prevent="updateUser">
   <h3>Update Product</h3>
   <input v-model="currentProduct.prodURL" type="text" placeholder="Product URL">
   <input v-model="currentProduct.prodName" type="text" placeholder="Product Name">
@@ -135,7 +135,7 @@
   <input v-model="currentProduct.quantity" type="text" placeholder="Quantity">
   <button class="btn mt-1 mb-1" @click="updateProduct(currentProduct)">Save changes</button>
   <button class="btn mt-1 mb-1" @click="closeUpdateProductModal">Cancel</button>
-</div>
+</form>
 </div>
 </div>
 
@@ -186,7 +186,7 @@ import { mapState, mapActions } from 'vuex'
       this.showUpdateUserModal = false;
     },
     updateUser() {
-      this.$store.dispatch('updateUser', { ...this.currentUser, userID: this.currentUser.userID }).then(() => {
+      this.$store.dispatch('updateUser', {...this.currentUser, userID: this.currentUser.userID }).then(() => {
         this.showUpdateUserModal = false;
       });
     },
@@ -207,7 +207,11 @@ import { mapState, mapActions } from 'vuex'
     updateProduct() {
       this.$store.dispatch('updateProduct', { ...this.currentProduct, prodID: this.currentProduct.prodID }).then(() => {
         this.showUpdateProductModal = false;
-      });
+      })
+      .catch(error => {
+        console.error('Error updating user:', error)
+        alert('Failed to update user')
+      })
     },
     deleteProduct(prodID) {
       if (confirm('Are you sure you want to delete this product?')) {
@@ -221,16 +225,19 @@ import { mapState, mapActions } from 'vuex'
         this.$store.dispatch('register', this.newUser).then(() => {
           this.showAddUserForm = false;
           this.newUser = { userProfile: '', firstName: '', lastName: '', userAge: '', emailAdd: '', userPass: '' };
-        });
+        }).catch(error => {
+          console.error('Error adding user:', error)
+          alert('Failed to add user')
+        })
       } else {
         alert('Please fill in all fields.');
       }
     },
     addProduct() {
-      if (this.newProduct.prodUrl && this.newProduct.prodName && this.newProduct.prodDescription && this.newProduct.category && this.newProduct.amount  && this.newProduct.quantity ) {
+      if (this.newProduct.prodURL && this.newProduct.prodName && this.newProduct.prodDescription && this.newProduct.category && this.newProduct.amount  && this.newProduct.quantity ) {
         this.$store.dispatch('addProduct', this.newProduct).then(() => {
           this.showAddProductForm = false;
-          this.newProduct = { prodUrl: '', prodName: '', prodDescription: '', category: '',amount: '', quantity: '' };
+          this.newProduct = { prodURL: '', prodName: '', prodDescription: '', category: '',amount: '', quantity: '' };
         });
       } else {
         alert('Please fill in all fields.');
