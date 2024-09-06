@@ -88,7 +88,7 @@ export default createStore({
       try {
         const { msg, err } = await(await axios.post(`${apiURL}users/register`, payload)).data
         if (msg) {
-          context.dispatch('fetchUser')
+          context.dispatch('fetchUsers')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: 'bottom-center'
