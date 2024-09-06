@@ -81,24 +81,69 @@ class Users {
     }
   }
 
-  async updateUser(req, res) {
+   updateUser(req, res) {
     try {
       let data = req.body
+
+
       if (data.userPass) {
-        data.userPass = await hash(data.userPass, 12)
-      }
-      const strQry = `
-            update Users
-            set ?
-            where userID = ${req.params.id}
-            `;
-      db.query(strQry, [data], (err) => {
-        if (err) throw new Error(err.message);
-        res.json({
-          status: res.statusCode,
-          msg: 'User details updated successfully 🔄',
+        const strQry = `
+              select userPass 
+              from Users
+              where userID = ${req.params.id}                  
+              `;
+        db.query(strQry, async (error, result)=>{
+          if (error) throw new Error(error.message);
+
+            if (req.body.userPass == result[0].userPass) {
+
+              const Query = `
+                update Users
+                set ?
+                where userID = ${req.params.id}
+                `;
+
+              db.query(Query, [data], (err) => {
+                if (err) throw new Error(err.message);
+                res.json({
+                  status: res.statusCode,
+                  msg: 'User details updated successfully 🔄',
+                })
+              })
+              return 'same pwd'
+
+            } else{
+              data.userPass = await hash(data.userPass, 12)
+
+              const Query = `
+                update Users
+                set ?
+                where userID = ${req.params.id}
+                `;
+
+              db.query(Query, [data], (err) => {
+                if (err) throw new Error(err.message);
+                res.json({
+                  status: res.statusCode,
+                  msg: 'User details updated successfully 🔄',
+                })
+              })
+            }
         })
-      })
+      }
+
+      // const strQry = `
+      //       update Users
+      //       set ?
+      //       where userID = ${req.params.id}
+      //       `;
+      // db.query(strQry, [data], (err) => {
+      //   if (err) throw new Error(err.message);
+      //   res.json({
+      //     status: res.statusCode,
+      //     msg: 'User details updated successfully 🔄',
+      //   })
+      // })
     } catch (e) {
       res.json({
         status: 404,
@@ -131,6 +176,7 @@ class Users {
   login(req, res) {
     try {
       const { emailAdd, userPass } = req.body;
+
       const strQry = `
             select userID, firstName, lastName, userAge, gender, userRole, emailAdd, userPass, userProfile
             from Users
