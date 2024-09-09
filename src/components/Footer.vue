@@ -1,5 +1,5 @@
 <template>
-    <footer class="fixed-bottom">
+    <footer>
        Novas Digitalis &copy; {{ cYear }} 
     </footer>
 </template>

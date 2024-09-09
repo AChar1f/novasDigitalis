@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid d-flex justify-content-center">
+  <div class="container-fluid d-flex justify-content-center pb-5">
     <div class="row">
       <form class="form">
         <h3>Become a Digitalist</h3>
@@ -99,7 +99,8 @@ export default {
 
 <style scoped>
 .container-fluid {
-  min-height: 85vh;
+  min-height: 100vh;
+  align-items: center;
 }
 
 .form {

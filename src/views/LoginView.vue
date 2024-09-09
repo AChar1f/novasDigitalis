@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid d-flex align-items-center justify-content-center">
+  <div class="container-fluid d-flex align-items-center justify-content-center pb-5">
       <form class="form" @submit.prevent="login">
         <h2>Login In</h2>
       <span class="input-span">
@@ -34,7 +34,7 @@ function login() {
 
 <style scoped>
 .container-fluid{
-    min-height: 85vh;
+    min-height: 100vh;
 }
 
 .form {

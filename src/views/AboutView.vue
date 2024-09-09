@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid about-cont">
+  <div class="container-fluid about-cont pb-5">
     <div class="container text-align-center">
       <h1>About Us</h1>
       <ul>
@@ -32,7 +32,7 @@
 
 <style scoped>
 .about-cont {
-  min-height: 85vh;
+  min-height: 100vh;
   background: url(https://achar1f.github.io/projectimages/Novas%20Digitalis/About-BG.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -49,6 +49,7 @@
 ul li {
   list-style: none;
   margin-top: 1rem;
+  text-align: start;
   
 }
 </style>

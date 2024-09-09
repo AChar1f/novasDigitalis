@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container-fluid pb-5">
         <h2>This is User Profile page</h2>
     </div>
 </template>
@@ -40,6 +40,8 @@ import { mapState, mapActions } from 'vuex'
 </script>
 
 <style scoped>
-
+.container-fluid {
+    min-height: 100vh;
+}
 
 </style>

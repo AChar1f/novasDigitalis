@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <h2>Welcome to Novas Digitalis</h2>
 
-    <div v-if="recentProducts" class="row gap-2 justify-content-center">
+    <div v-if="recentProducts" class="row rP gap-2 justify-content-center">
       <h3>Latest Products</h3>
       <CardComp v-for="product in recentProducts" :key="product.prodID">
         <template #cardHeader>
@@ -11,9 +11,12 @@
         <template #cardBody>
           <h5>{{ product.prodName }}</h5>
           <p>R{{ product.amount }}</p>
-          <router-link :to="`/item/${product.prodID}`">
-            <button>View</button>
-          </router-link>
+          <div class="buttons">
+            <router-link :to="`/item/${product.prodID}`">
+              <button class="icon"><i class="bi bi-info-square-fill"></i></button>
+            </router-link>
+            <button class="icon"><i class="bi bi-cart4"></i></button>
+          </div>
         </template>
       </CardComp>
     </div>
@@ -45,6 +48,19 @@ export default {
 
 <style scoped>
 .container-fluid {
-  min-height: 85vh;
+  min-height: 100vh;
+}
+.bi {
+    color: #FFA500;
+    font-size: x-large;
+}
+
+.icon{
+    background: none;
+    border: none;
+}
+.buttons{
+  display: flex;
+  justify-content: space-between;
 }
 </style>
