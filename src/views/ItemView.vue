@@ -10,6 +10,7 @@
                     <h5>{{ product.prodName }}</h5>
                     <p>{{ product.prodDescription }}</p>
                     <p class="lead">R{{ product.amount }}</p>
+                    <button class="icon"><i class="bi bi-cart4"></i></button>
                 </template>
             </CardComp>
         </div>
@@ -49,7 +50,15 @@ import Spinner from '../components/Spinner.vue'
 
 <style scoped>
 .container-fluid{
-    min-height: 85vh;
+    min-height: 100vh;
+}
+.bi {
+    color: #FFA500;
+    font-size: x-large;
 }
 
+.icon{
+    background: none;
+    border: none;
+}
 </style>

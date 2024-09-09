@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid admin-section">      
+<div class="container-fluid admin-section pb-5">      
 <div class="row  pt-4">
   <h2 class="headings ">Users</h2>
 </div>
@@ -344,7 +344,7 @@ button {
   z-index: 2; 
   padding: 20px;
   width: 100vw;
-  min-height: 85vh;
+  min-height: 100vh;
 }
 
 @media (max-width: 1350px) {
