@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 import router from '@/router'
@@ -7,7 +8,7 @@ import { useCookies } from 'vue3-cookies'
 const {cookies} = useCookies()
 import { applyToken } from '@/service/VerfiedUser.js'
 
-const apiURL = 'https://novasdigitalis.onrender.com/'
+const apiURL = 'http://localhost:3010/'
 
 applyToken(cookies.get('VerifiedUser')?.token)
 
@@ -17,7 +18,8 @@ export default createStore({
     user: null,
     products: null,
     recentProducts: null,
-    product: null
+    product: null,
+    cart: null
   },
   getters: {
   },
@@ -40,6 +42,10 @@ export default createStore({
 
     setProduct(state, value) {
       state.product = value
+    },
+
+    setCart(state, value) {
+      state.cart = value
     }
   },
   actions: {
@@ -169,7 +175,7 @@ export default createStore({
           })
           cookies.set('VerifiedUser', {token, msg, result})
           applyToken(token)
-          router.push({ name: 'profile' })
+          router.push({ name: 'products' })
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -189,6 +195,7 @@ export default createStore({
     async fetchProducts(context) {
       try {
         const { results, msg } = await(await axios.get(`${apiURL}items`)).data
+        
         if (results) {
           context.commit('setProducts', results)
         } else {
@@ -206,6 +213,7 @@ export default createStore({
     },
 
     async recentProducts(context) {
+      
       try {
         const { results, msg } = await(await axios.get(`${apiURL}items/recent`)).data
         if(results) {
@@ -288,6 +296,122 @@ export default createStore({
             autoClose: 2000,
             position: 'bottom-center'
           })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: 'bottom-center'
+        })
+      }
+    },
+
+    async addToCart(context, payload){
+      try {
+        console.log(payload);
+        const { results, msg } = await(await axios.post(`${apiURL}users/${payload.id}/cart`, payload.cred)).data
+        if(results) {
+          toast.success(`${msg}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          })
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: 'bottom-center'
+        })
+      }
+    },
+    async fetchCart(context){
+      try {
+        const { results, msg } = await(await axios.get(`${apiURL}users/${cookies.get('VerifiedUser')?.result.userID}/carts`)).data
+        
+        if(results) {
+          context.commit('setCart', results)
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: 'bottom-center'
+        })
+      }
+    },
+    async checkout(context){
+      try {
+        const data = await (await axios.delete(`${apiURL}users/${cookies.get('VerifiedUser')?.result.userID}/cart`)).data
+
+        if(data) {
+          context.dispatch('fetchCart')
+          Swal.fire({
+            title: 'Thank You for your purchase!',
+            text: 'Enjoy your purchase!',
+            icon: 'success',
+            confirmButtonText: 'Confirm'
+        })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: 'bottom-center'
+        })
+      }
+    },
+
+    async clearCart(context){
+      try {
+        console.log(`${apiURL}`)
+        const data = await (await axios.delete(`${apiURL}users/${cookies.get('VerifiedUser')?.result.userID}/cart`)).data
+
+        if(data) {
+          context.dispatch('fetchCart')
+          toast.success(`${data.msg}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: 'bottom-center'
+        })
+      }
+    },
+
+    async deleteItem(context, payload){
+      try {
+        const { msg } = await(await axios.delete(`${apiURL}users/${payload.id}/cart/${payload.oid}`)).data
+        if(msg) {
+          context.dispatch('fetchCart')
+          toast.success(`${msg}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: 'bottom-center'
+        })
+      }
+    },
+
+    async updateCart(context, payload) {
+      try {
+        const { msg } = await (await axios.patch(`${apiURL}users/${payload.userID}/cart/${payload.orderID}`, payload.cred)).data
+        if(msg) {
+
+          
+          context.dispatch('fetchCart')
         }
       } catch (e) {
         toast.error(`${e.message}`, {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid pt-5">
     <h2>Welcome to Novas Digitalis</h2>
 
     <div v-if="recentProducts" class="row rP gap-2 justify-content-center">
@@ -20,7 +20,7 @@
         </template>
       </CardComp>
     </div>
-    <Spinner v-else/>
+    <Spinner v-else class="mt-5"/>
   </div>
 </template>
 
