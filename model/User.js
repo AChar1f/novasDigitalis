@@ -69,7 +69,7 @@ class Users {
           const token = createToken(user);
           res.json({
             token,
-            msg: 'Registration Successful =). Welcome to Novas Digitalis',
+            msg: 'Registration Successful 👾. Welcome to Novas Digitalis',
           })
         }
       });

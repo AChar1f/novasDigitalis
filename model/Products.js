@@ -31,10 +31,18 @@ class Products {
             `
             db.query(strQry, (err, result) => {
                 if(err) throw new Error(err.message)
-                res.json({
-                    status: res.statusCode,
-                    result: result[0]
-                })
+                if(result.length > 0){
+                    res.json({
+                        status: res.statusCode,
+                        result: result[0]
+                    })
+
+                }else{
+                    res.json({
+                        status: 404,
+                        msg : 'Resource not found'
+                    })
+                }
             })
         } catch (e) {
             res.json({
