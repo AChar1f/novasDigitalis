@@ -153,7 +153,7 @@ import { mapState, mapActions } from 'vuex'
       showUpdateUserModal: false,
       showUpdateProductModal: false,
       newUser: {
-        userProfile: '',
+      userProfile: 'https://achar1f.github.io/projectimages/Novas%20Digitalis/LogoNoBg.png',
       firstName: '',
       lastName: '',
       userAge: '',
@@ -224,7 +224,7 @@ import { mapState, mapActions } from 'vuex'
       if (this.newUser.userProfile && this.newUser.firstName && this.newUser.lastName && this.newUser.userAge && this.newUser.emailAdd && this.newUser.userPass) {
         this.$store.dispatch('register', this.newUser).then(() => {
           this.showAddUserForm = false;
-          this.newUser = { userProfile: '', firstName: '', lastName: '', userAge: '', emailAdd: '', userPass: '' };
+          this.newUser = { userProfile: 'https://achar1f.github.io/projectimages/Novas%20Digitalis/LogoNoBg.png', firstName: '', lastName: '', userAge: '', emailAdd: '', userPass: '' };
         }).catch(error => {
           console.error('Error adding user:', error)
           alert('Failed to add user')
