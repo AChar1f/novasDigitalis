@@ -4,39 +4,35 @@
     </div>
 </template>
 
-<script>
-import { mapState, mapActions } from 'vuex'
+<script >
+import { ref, onMounted } from 'vue';
 
-    export default {
-        name: 'UserProfile',
-        
-        data() {
-            return {
-                showUpdateUserModal: false,
-                currentUser: {}
-            }
-        },
-        computed: {
-            ...mapState(['users'])
-        },
-        methods: {
-            ...mapActions(['updateUser', 'deleteUser']),
-            updateUser() {
-                this.$store.dispatch('updateUser', {...this.currentUser, userID: this.currentUser.userID}).then(() => {
-                    this.showUpdateUserModal = false
-                })
-            },
-            deleteUser(userID) {
-      if (confirm('Are you sure you want to permanently delete your account?')) {
-        this.$store.dispatch('deleteUser', userID).then(() => {
-          this.fetchUsers();
+export default {
+  setup() {
+    const num = ref(0);
+
+    onMounted(() => {
+      const hasReloaded = localStorage.getItem('hasReloaded');
+
+      if (!hasReloaded) {
+        localStorage.setItem('hasReloaded', 'true');
+
+        setImmediate(() => {
+          if (num.value === 0) {
+            num.value++;
+            window.location.reload();
+          }
         });
+      } else {
+        localStorage.removeItem('hasReloaded');
       }
-    }
-        },
-    
+    });
 
-}
+    return { num };
+  }
+};
+
+
 </script>
 
 <style scoped>

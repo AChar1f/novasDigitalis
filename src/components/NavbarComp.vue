@@ -22,21 +22,35 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/contactUs">Contact Us</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!user?.result">
           <router-link class="nav-link" to="/register">Register</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="user?.result?.userRole == 'Admin'">
+          <router-link class="nav-link" to="/admin">Admin</router-link>
+        </li>
+        <li class="nav-item" v-if="!user?.result">
           <router-link class="nav-link" to="/login">Login</router-link>
         </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/admin">Admin</router-link>
+        <li class="nav-item" v-else>
+          <router-link class="nav-link" to="/profile"><i class="bi bi-person-square"></i></router-link>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 </template>
+<script setup>
+import { onMounted } from 'vue';
+import { useCookies } from 'vue3-cookies';
+const {cookies} = useCookies()
 
+  const user = cookies.get('VerifiedUser')
+  
+  onMounted(()=>{
+    console.log(cookies.get('VerifiedUser'));
+  })
+
+</script>
 
 <style scoped>
 .navbar{

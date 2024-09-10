@@ -175,7 +175,7 @@ export default createStore({
           })
           cookies.set('VerifiedUser', {token, msg, result})
           applyToken(token)
-          router.push({ name: 'products' })
+          router.push({ name: 'profile' })
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
