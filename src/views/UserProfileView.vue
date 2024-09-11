@@ -95,9 +95,9 @@ Card
                 });
             }
          },
-         logOut(){
-            cookies.remove('VerfiedUser')
-                router.push({ name: 'login'})
+         logOut(){          
+            cookies.remove('VerifiedUser')
+            router.push({ name: 'login'})
          }
     },
 
