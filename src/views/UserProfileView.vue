@@ -11,6 +11,7 @@
                     <p>{{ user.emailAdd }}</p>
                     <button class="btn mt-1 mb-1" @click="openUpdateUserModal(user)">Update</button>
                     <button class="btn mt-1 mb-1" @click="deleteUser(user.userID)">Delete</button>
+                    <button class="btn mt-1 mb-1" @click="logOut">Logout</button>
                 </template>
             </Card>
         </div>
@@ -38,7 +39,9 @@
 import Card from '@/components/Card.vue';
 import {mapState, mapActions} from 'vuex'   
 import { useCookies } from 'vue3-cookies';
+import router from '@/router';
 const {cookies} = useCookies()
+
 
 const vUser = cookies.get('VerifiedUser').result
 console.log(vUser)
@@ -91,6 +94,10 @@ Card
                 this.fetchUsers();
                 });
             }
+         },
+         logOut(){
+            cookies.remove('VerfiedUser')
+                router.push({ name: 'login'})
          }
     },
 
