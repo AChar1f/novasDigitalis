@@ -40,6 +40,7 @@
           placeholder="Password"
         />
         <button @click.prevent="addUser" class="submit">Register</button>
+        <span class="span">Already have an account? <router-link to="/login">Login</router-link></span>
       </form>
     </div>
   </div>
@@ -77,7 +78,7 @@ export default {
         this.newUser.emailAdd &&
         this.newUser.userPass
       ) {
-        this.$store.dispatch("register", this.newUser).then(() => {
+        this.$store.dispatch("addUser", this.newUser).then(() => {
           this.showAddUserForm = false;
           this.newUser = {
             firstName: "",

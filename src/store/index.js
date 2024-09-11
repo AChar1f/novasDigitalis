@@ -90,6 +90,30 @@ export default createStore({
       }
     },
 
+    async addUser(context, payload) {
+      try {
+        const { token, msg, error } = await(await axios.post(`${apiURL}users/register`, payload)).data
+        if (token) {
+          context.dispatch('fetchUsers')
+          toast.success(`${msg}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          }) 
+          router.push({ name: 'login'})
+        } else {
+            toast.warning(`${error}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          })
+      }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: 'bottom-center'
+        })
+      }
+    },
+
     async register(context, payload) {
       try {
         const { token, msg, error } = await(await axios.post(`${apiURL}users/register`, payload)).data
@@ -99,7 +123,6 @@ export default createStore({
             autoClose: 2000,
             position: 'bottom-center'
           }) 
-          // router.push({ name: 'login'})
         } else {
             toast.warning(`${error}`, {
             autoClose: 2000,
@@ -161,6 +184,30 @@ export default createStore({
       }
     },
 
+    async removeAccount(context, userID) {
+      try {
+        const { msg, err } = await(await axios.delete(`${apiURL}users/delete/${userID}`)).data
+        if (msg) {
+          toast.success(`${msg}`, {
+            autoClose: 2000, 
+            position: 'bottom-center'
+          })
+          cookies.remove('VerifiedUser')
+          router.push({name : 'login'})
+        } else {
+          toast.error(`${err}`, {
+            autoClose: 2000,
+            position: 'bottom-center'
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: 'bottom-center'
+        })
+      }
+    },
+
     async login(context, payload) {
       try {
         const { msg, result, token } = await (await axios.post(`${apiURL}users/login`, payload)).data
@@ -175,7 +222,7 @@ export default createStore({
           })
           cookies.set('VerifiedUser', {token, msg, result})
           applyToken(token)
-          router.push({ name: 'products' })
+          router.push({ name: 'profile' })
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,

@@ -10,7 +10,7 @@
                     <h5>{{ product.prodName }}</h5>
                     <p>{{ product.prodDescription }}</p>
                     <p class="lead">R{{ product.amount }}</p>
-                    <button class="icon"><i class="bi bi-cart4"></i></button>
+                    <button class="icon"><i class="bi bi-cart4" @click.prevent="addProd(product)"></i></button>
                 </template>
             </CardComp>
         </div>
@@ -20,6 +20,8 @@
 
 <script>
 import store from '@/store'
+import { useCookies } from 'vue3-cookies';
+const {cookies} = useCookies()
 console.log(store.state.product);
 
 import CardComp from '../components/Card.vue'
@@ -37,6 +39,15 @@ import Spinner from '../components/Spinner.vue'
             productId() {
                 return this.$route.params.id
             }
+        },
+        methods: {
+            addProd(product){
+            const payload = {
+                id : cookies.get('VerifiedUser')?.result.userID,
+                cred : { prodID : product.prodID }
+            }
+            return store.dispatch('addToCart', payload )
+        },
         },
         mounted() {
             console.log(this.productId);

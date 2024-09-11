@@ -15,7 +15,7 @@
             <router-link :to="`/item/${product.prodID}`">
               <button class="icon"><i class="bi bi-info-square-fill"></i></button>
             </router-link>
-            <button class="icon"><i class="bi bi-cart4"></i></button>
+            <button class="icon"><i class="bi bi-cart4" @click.prevent="addProd(product)"></i></button>
           </div>
         </template>
       </CardComp>
@@ -27,6 +27,8 @@
 <script>
 import CardComp from '../components/Card.vue'
 import Spinner from '../components/Spinner.vue'
+import { useCookies } from 'vue3-cookies';
+const {cookies} = useCookies()
 
 export default {
 
@@ -38,6 +40,15 @@ export default {
     recentProducts() {
       return this.$store.state.recentProducts
     }
+  },
+  methods: {
+    addProd(product){
+            const payload = {
+                id : cookies.get('VerifiedUser')?.result.userID,
+                cred : { prodID : product.prodID }
+            }
+            return this.$store.dispatch('addToCart', payload )
+        }
   },
   mounted() {
     this.$store.dispatch('recentProducts')
