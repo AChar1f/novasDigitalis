@@ -38,12 +38,10 @@ export default {
         products() {
             return this.$store.state.products
         },
-        
         currentUserID(){
             return cookies.get('VerifiedUser')?.result.userID
-        }
+        },
     },
-
     methods : {
         addProd(product){
             const payload = {
@@ -51,11 +49,10 @@ export default {
                 cred : { prodID : product.prodID }
             }
             return store.dispatch('addToCart', payload )
-        },
+        }
     },
     mounted() {
         console.log(cookies.get('VerifiedUser')?.result.userID);
-        
         this.$store.dispatch('fetchProducts')
     }
 }
