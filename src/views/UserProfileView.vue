@@ -1,19 +1,20 @@
 <template>
     <div class="container-fluid pb-5">
-        <h2>This is User Profile page</h2>
+        <h2>Account</h2>
+        <h2>Welcome {{user.firstName}}</h2>
         <div class="row justify-content-center mb-5">
-            <Card v-if="user">
-                <template #cardHeader>
-                    <img :src="user.userProfile" :alt="user.firstName" class="img-fluid" loading="lazy">
-                </template>
-                <template #cardBody>
-                    <h6>{{ user.firstName }}  {{ user.lastName }}</h6>
-                    <p>{{ user.emailAdd }}</p>
-                    <button class="btn mt-1 mb-1" @click="openUpdateUserModal(user)">Update</button>
-                    <button class="btn mt-1 mb-1" @click="deleteUser(user.userID)">Delete</button>
-                    <button class="btn mt-1 mb-1" @click="logOut">Logout</button>
-                </template>
-            </Card>
+<div class="card text-center" v-if="user">
+  <div class="card-header">
+    <img :src="user.userProfile" :alt="user.firstName" class="img-fluid" loading="lazy">
+  </div>
+  <div class="card-body">
+    <h6>{{ user.firstName }}  {{ user.lastName }}</h6>
+    <p>{{ user.emailAdd }}</p>
+    <button class="btn mt-1 mb-1" @click="openUpdateUserModal(user)"><i class="bi bi-pencil-square"></i></button>
+    <button class="btn mt-1 mb-1" @click="deleteUser(user.userID)"><i class="bi bi-trash"></i></button>
+    <button class="btn mt-1 mb-1" @click="logOut"><i class="bi bi-box-arrow-right"></i></button>
+  </div>
+</div>
         </div>
 
 
@@ -36,7 +37,6 @@
 </template>
 
 <script>
-import Card from '@/components/Card.vue';
 import {mapState, mapActions} from 'vuex'   
 import { useCookies } from 'vue3-cookies';
 import router from '@/router';
@@ -46,9 +46,7 @@ const {cookies} = useCookies()
 const vUser = cookies.get('VerifiedUser').result
 console.log(vUser)
 export default {
-components : {
-Card
-},
+
     data() {
         return{
             showUpdateUserModal: false,
@@ -100,7 +98,7 @@ Card
             router.push({ name: 'login'})
             setTimeout(() => {
                 window.location.reload()
-                }, 330
+                }, 500
             )
         }
     },
@@ -117,6 +115,12 @@ Card
 <style scoped>
 .container-fluid {
     min-height: 100vh;
+}
+
+.card{
+  width: 80%; 
+  background-image: linear-gradient(180deg, #2C3E50 65%,#2c2c2c);
+  color: #d3d3d3;
 }
 
 table img {
@@ -151,7 +155,7 @@ table img {
 
 
 button:hover {
-  background-color: #2C3E50;
+  background-color: #2c3e50c0;
   color:#FFA500;
   border: 1px solid #d3d3d3;
 }
@@ -275,5 +279,4 @@ button {
     font-size: 0.7rem;
   }
 }
-</style> -->
- -->
+</style>
