@@ -8,5 +8,148 @@
 </head>
 <body>
     <h2>Novas Digitalis API Routes</h2>
+
+    <main>
+        <div style="display: grid; max-width: 50rem; justify-content: center;">
+            <table border = 5>
+                <caption><h3>Landing</h3></caption>
+                <thead>
+                    <tr>
+                        <th>HTTP Methods</th>
+                        <th>Path</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GET</td>
+                        <td>/</td>
+                        <td>Fetches landing/home page</td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            <table border = 5>
+                <caption><h3>Users</h3></caption>
+                <thead>
+                    <tr>
+                        <th>HTTP Method</th>
+                        <th>Path</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GET</td>
+                        <td>/users</td>
+                        <td>Fetches all Users data from the database</td>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td>/users/:id</td>
+                        <td>Fetches a single User's data from the database for the id provided</td>
+                    </tr>
+                    <tr>
+                        <td>POST</td>
+                        <td>/users/register</td>
+                        <td>Adds a new user to the database.</td>
+                    </tr>
+                    <tr>
+                        <td>PATCH</td>
+                        <td>/users/update/:id</td>
+                        <td>Updates a user for the id value provided.</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td>/users/delete/:id</td>
+                        <td>Deletes a user's data from the database for the id provided</td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            <table border = 5>
+                <caption><h3>Products</h3></caption>
+                <thead>
+                    <tr>
+                        <th>HTTP Method</th>
+                        <th>Path</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GET</td>
+                        <td>/items</td>
+                        <td>Fetches all Products data from the database</td>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td>/items/:id</td>
+                        <td>Fetches a product's data from the database for the id provided.</td>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td>/items/latest</td>
+                        <td>Fetches the last 4 products added to the database from the most recent.</td>
+                    </tr>
+                    <tr>
+                        <td>POST</td>
+                        <td>/items/addProduct</td>
+                        <td>Adds a new product to the database.</td>
+                    </tr>
+                    <tr>
+                        <td>PATCH</td>
+                        <td>/items/update/:id</td>
+                        <td>Updates a product for the id value provided.</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td>/items/delete/:id</td>
+                        <td>Deletes a product's data from the database for the id provided</td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            <table border = 5>
+                <caption><h3>Cart</h3></caption>
+                <thead>
+                    <tr>
+                        <th>HTTP Method</th>
+                        <th>Path</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GET</td>
+                        <td>/users/:id/carts</td>
+                        <td>Fetches all cart data from the database</td>
+                    </tr>
+                    <tr>
+                        <td>POST</td>
+                        <td>/users/:id/cart</td>
+                        <td>Adds items to cart table.</td>
+                    </tr>                
+                    <tr>
+                        <td>PATCH</td>
+                        <td>/users/:id/cart/oid</td>
+                        <td>Updates the quantity of items in the cart table.</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td>/users/:id/cart</td>
+                        <td>Clears the cart table.</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td>/users/:id/cart/:oid</td>
+                        <td>Deletes a specified product from the cart table.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+
 </body>
 </html>
