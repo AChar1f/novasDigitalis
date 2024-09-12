@@ -6,7 +6,7 @@ import { verifyToken } from '../middleware/UserAuthentification.js'
 const productRouter = express.Router()
 productRouter.use(bodyParser.json())
 
-productRouter.get('/',  (req, res) => {
+productRouter.get('/', verifyToken, (req, res) => {
     products.fetchProducts(req, res)
 })
 
@@ -14,19 +14,19 @@ productRouter.get('/recent', (req, res) => {
     products.recentProducts(req, res)
 })
 
-productRouter.get('/:id',  (req, res) => {
+productRouter.get('/:id', verifyToken, (req, res) => {
     products.fetchProduct(req, res)
 })
 
-productRouter.post('/addProduct', (req, res) => {
+productRouter.post('/addProduct', verifyToken, (req, res) => {
     products.addProduct(req, res)
 })
 
-productRouter.patch('/update/:id', (req, res) => {
+productRouter.patch('/update/:id', verifyToken, (req, res) => {
     products.updateProduct(req, res)
 })
 
-productRouter.delete('/delete/:id', (req, res) => {
+productRouter.delete('/delete/:id', verifyToken, (req, res) => {
     products.deleteProduct(req, res)
 })
 

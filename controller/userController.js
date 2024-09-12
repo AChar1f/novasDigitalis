@@ -2,6 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import {  users } from '../model/index.js'
 import { cart } from '../model/index.js'
+import { verifyToken } from '../middleware/UserAuthentification.js'
 
 const userRouter = express.Router()
 userRouter.use(bodyParser.json())
@@ -34,7 +35,7 @@ userRouter.delete('/delete/:id', (req, res) => {
 })
 
 
-cartRouter.get('/:id/carts', (req, res) => {
+cartRouter.get('/:id/carts', verifyToken,(req, res) => {
     cart.fetchCart(req, res)
 })
 
