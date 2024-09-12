@@ -6,7 +6,7 @@
                 <thead>
                   <tr>
                     <th>Product</th>
-                    <th>Namey</th>
+                    <th>Name</th>
                     <th>Unit Price</th>
                     <th>Quantity</th>
                     <th>Total Price</th>
@@ -15,13 +15,13 @@
                 </thead>
                 <tbody>
                     <tr v-for="item in cart" :key="item.orderID">
-                        <td imgcont><img :src="item.prodURL" :alt="item.prodName" class="w-25"></td>
+                        <td imgcont><img :src="item.prodURL" :alt="item.prodName" class="img-fluid"></td>
                         <td>{{ item.prodName }}</td>
                         <td>{{ item.UnitPrice }}</td>
                         <td>
-                        <button class="btn btn-outline-dark" @click.prevent="decrease(item)" type="button" ><i class="bi bi-dash"></i></button> 
+                        <button class="btn btn-dark qval" @click.prevent="decrease(item)" type="button" ><i class="bi bi-dash-lg"></i></button> 
                         {{ item.quantity }} 
-                        <button class="btn btn-dark" @click.prevent="increase(item)" type="button" ><i class="bi bi-plus-lg"></i> </button>
+                        <button class="btn btn-dark qval" @click.prevent="increase(item)" type="button" ><i class="bi bi-plus-lg"></i> </button>
                         </td>
                         <td>{{ item.TotalPrice }}</td>
                         <td> <button class="btn btn-dark" @click="deleteItem(item.orderID)"><i class="bi bi-trash"></i></button></td>
@@ -38,7 +38,7 @@
                     <i class="bi bi-cart-x" @click.prevent="clearCart()"></i>
                 </button>
                 <button class="btn" @click.prevent="purchase()">
-                    Checkout
+                    <i class="bi bi-cart-check"></i>
                 </button></td>
                   </tr>
                 </tfoot>
@@ -145,7 +145,110 @@ min-height: 100vh;
 }
 
 [imgcont]{
-    width: 15rem;
+aspect-ratio: 1/1;
+  object-fit: contain;
+  object-position: center;
+  max-width: 4rem;
+
+}
+.qval{
+font-size: 0.7rem;
 }
 
+.table th,
+.table td {
+  border: 1px solid #d3d3d3;
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle; 
+}
+
+.table th{
+    background-color: #2c3e50;
+    color:#d3d3d3
+}
+
+.table td {
+    background-color: #2c3e50;;
+    color: #d3d3d3;
+    min-width: 5rem;
+}
+
+button:hover {
+  background-color: #2c3e50;
+  color:#FFA500;
+  border: 1.5px solid #d3d3d3;
+}
+
+button {
+    background-color: #FFA500;
+    margin-inline: 5px;
+}
+
+@media (max-width: 992px) {
+  
+  .table {
+    overflow-x: auto;
+    white-space: nowrap; 
+  }
+  
+  table button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 928px) {
+
+  .table {
+    display: block; 
+    overflow-x: auto; 
+    white-space: nowrap; 
+  }
+}
+
+@media (max-width: 768px) {
+
+  .table {
+    display: block; 
+    overflow-x: auto; 
+    white-space: nowrap; 
+  }
+
+
+
+  .table th,
+  .table td {
+    padding: 4px; 
+    font-size: 1rem; 
+  }
+
+  table button {
+    font-size: 1rem;
+  }
+
+}
+
+
+@media (max-width: 575px) {
+  .table th,
+  .table td {
+    font-size: 0.9rem; 
+  }
+
+
+  table button {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .table {
+    display: block;
+  }
+
+
+  table button {
+    font-size: 0.5rem;
+  }
+}
 </style>
