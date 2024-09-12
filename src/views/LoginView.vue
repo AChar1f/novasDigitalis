@@ -66,8 +66,8 @@ function login() {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: var(--clr-alpha);
-  outline: 2px solid var(--bg-dark);
+  background-color: var(--bg-light);
+  outline: 2px solid var(--clr-alpha);
 }
 
 .form input[type="email"]:focus,
@@ -112,7 +112,8 @@ function login() {
 }
 
 input{
-    color: #d3d3d3;
+  background-color: #d3d3d3;
+    caret-color: #FFA500;
 
 }
 </style>

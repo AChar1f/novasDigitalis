@@ -128,7 +128,7 @@ export default {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: var(--clr-alpha);
+  background-color: var(--bg-light);
   outline: 2px solid var(--bg-dark);
 }
 
@@ -170,6 +170,7 @@ export default {
 }
 
 input {
-  color: #d3d3d3;
+  background-color: var(--bg-light);
+  caret-color: var(--clr);
 }
 </style>

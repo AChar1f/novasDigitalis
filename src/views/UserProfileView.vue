@@ -1,8 +1,8 @@
 <template>
-    <div class="container-fluid pb-5">
+    <div class="container-fluid">
         <h2>Account</h2>
         <h2>Welcome {{user.firstName}}</h2>
-        <div class="row justify-content-center mb-5">
+  <div class="row justify-content-center p-3">
 <div class="card text-center" v-if="user">
   <div class="card-header">
     <img :src="user.userProfile" :alt="user.firstName" class="img-fluid" loading="lazy">
@@ -118,7 +118,7 @@ export default {
 }
 
 .card{
-  width: 80%; 
+  width: 25rem; 
   background-image: linear-gradient(180deg, #2C3E50 65%,#2c2c2c);
   color: #d3d3d3;
 }
