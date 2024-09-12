@@ -32,7 +32,7 @@
           <router-link class="nav-link" to="/login">Login</router-link>
         </li>
         <li class="nav-item" v-else>
-          <router-link class="nav-link" to="/profile"><i class="bi bi-person-square"></i></router-link>
+          <router-link class="nav-link" to="/profile">Profile</router-link>
         </li>
       </ul>
     </div>
