@@ -96,9 +96,13 @@ Card
             }
          },
          logOut(){          
-            cookies.remove('VerifiedUser')
+             cookies.remove('VerifiedUser')
             router.push({ name: 'login'})
-         }
+            setTimeout(() => {
+                window.location.reload()
+                }, 330
+            )
+        }
     },
 
     mounted() {

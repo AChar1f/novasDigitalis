@@ -2,8 +2,8 @@
   <div class="wrapper">
     <Navbar/>
     <router-view/>
-    <Footer />
   </div>
+  <Footer />
 </template>
 
 <script>

@@ -213,7 +213,7 @@ export default createStore({
         const { msg, result, token } = await (await axios.post(`${apiURL}users/login`, payload)).data
         if (result) {
           toast.success(`${msg}`, {
-            autoClose: 2000,
+            autoClose: 400,
             position: 'bottom-center'
           })
           context.commit('setUser', {
@@ -223,6 +223,10 @@ export default createStore({
           cookies.set('VerifiedUser', {token, msg, result})
           applyToken(token)
           router.push({ name: 'profile' })
+          setTimeout(() => {
+            window.location.reload()
+          }, 800
+        )
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,

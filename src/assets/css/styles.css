@@ -39,3 +39,7 @@
   img[alt='logo']{
     width: 4rem;
   }
+
+  .wrapper {
+    min-height: 100vh;
+  }
