@@ -40,7 +40,7 @@
 </nav>
 </template>
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useCookies } from 'vue3-cookies';
 const {cookies} = useCookies()
 
@@ -48,9 +48,7 @@ const {cookies} = useCookies()
     return cookies.get('VerifiedUser')
   })
   
-  onMounted(()=>{
-    console.log(cookies.get('VerifiedUser'));
-  })
+
 
 </script>
 
