@@ -1,8 +1,27 @@
 <template>
     <div class="container-fluid col-10 pt-5">
         <h2>This is Product Page</h2>
+        <form>
+            <input type="search" v-model="itemSearch">
+            <select v-model="sCategory">
+                <option value="">All</option>
+                <option value="CPU">CPU</option>
+                <option value="Ram">RAM</option>
+                <option value="Monitor">Monitor</option>
+                <option value="Chasis">Chasis</option>
+                <option value="Motherboard">Motherboard</option>
+                <option value="Mice">Mice</option>
+                <option value="Keyboards">Keyboards</option>
+                <option value="Power Supplies">Power Supplies</option>
+                <option value="Storage">Storage</option>
+            </select>
+            <button @click.prevent="toggleSortOrder">Sort By Price: {{ sortPriceVal }}</button>
+        </form>
         <div v-if="products?.length" class="row justify-content-center gap-4 mb-4">
-            <CardComp v-for="product in products" :key="product.prodID">
+            <div v-if="!sortedFilteredProd.length">
+                <p>Product not Found</p>
+            </div>
+            <CardComp v-for="product in sortedFilteredProd" :key="product.prodID">
                 <template #cardHeader>
                     <img :src="product.prodURL" loading="lazy" class="img-fluid" :alt="product.prodName">
                 </template>
@@ -34,6 +53,13 @@ export default {
     components: {
         CardComp, Spinner
     },
+    data(){
+        return{
+            itemSearch: '',
+            sCategory: '',
+            sortOrder: 'asc'
+        }
+    },
     computed: {
         products() {
             return this.$store.state.products
@@ -41,6 +67,21 @@ export default {
         currentUserID(){
             return cookies.get('VerifiedUser')?.result.userID
         },
+        filteredProducts() {
+            return this.products.filter(product => product.prodName.toLowerCase().includes(this.itemSearch.toLowerCase()) && (this.sCategory === '' || product.category === this.sCategory))
+        },
+        sortedFilteredProd() {
+            return this.filteredProducts.slice().sort((a, b) => {
+                if(this.sortOrder === 'asc'){
+                    return a.amount - b.amount
+                } else {
+                    return b.amount - a.amount
+                }
+            })
+        },
+        sortPriceVal(){
+            return this.sortOrder == 'asc' ? 'Lowest' : 'Highest'
+        }
     },
     methods : {
         addProd(product){
@@ -49,6 +90,10 @@ export default {
                 cred : { prodID : product.prodID }
             }
             return store.dispatch('addToCart', payload )
+        },
+
+        toggleSortOrder() {
+            this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc'
         }
     },
     mounted() {
