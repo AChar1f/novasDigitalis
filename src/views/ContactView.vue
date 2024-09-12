@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <h2>Contact Us</h2>
         <form
-          action="https://formspree.io/f/manwyeao"
+          action="https://formspree.io/f/xovabvoz"
           method="POST"
           class="rmform form-control mt-3"
         >
