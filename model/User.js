@@ -136,19 +136,6 @@ class Users {
             }
         })
       }
-
-      // const strQry = `
-      //       update Users
-      //       set ?
-      //       where userID = ${req.params.id}
-      //       `;
-      // db.query(strQry, [data], (err) => {
-      //   if (err) throw new Error(err.message);
-      //   res.json({
-      //     status: res.statusCode,
-      //     msg: 'User details updated successfully 🔄',
-      //   })
-      // })
     } catch (e) {
       res.json({
         status: 404,
