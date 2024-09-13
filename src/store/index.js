@@ -8,7 +8,7 @@ import { useCookies } from 'vue3-cookies'
 const {cookies} = useCookies()
 import { applyToken } from '@/service/VerfiedUser.js'
 
-const apiURL = 'http://localhost:3010/'
+const apiURL = 'https://novasdigitalis.onrender.com/'
 
 applyToken(cookies.get('VerifiedUser')?.token)
 
