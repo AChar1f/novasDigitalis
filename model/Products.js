@@ -128,7 +128,7 @@ class Products {
                 if(err) throw new Error('Ran into issues while trying to delete product, please review delete query.')
             res.json({
                 status: res.statusCode,
-                msg: 'Successfully deleted product information.'
+                msg: 'Successfully deleted product.'
             })
             })
         } catch (e) {
