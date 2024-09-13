@@ -60,7 +60,7 @@
   <input v-model="currentUser.userProfile" type="text" placeholder="Profile URL">
   <input v-model="currentUser.firstName" type="text" placeholder="First Name">
   <input v-model="currentUser.lastName" type="text" placeholder="Last Name">
-  <input v-model="currentUser.userAge" type="text" placeholder="Age">
+  <input v-model="currentUser.userAge" type="number" placeholder="Age">
   <input v-model="currentUser.gender" type="text" placeholder="Gender">
   <input v-model="currentUser.emailAdd" type="email" placeholder="Email">
   <input v-model="currentUser.userPass" type="password" placeholder="Password">
@@ -80,15 +80,15 @@
 
 <!-- Add Product Form -->
 <div v-if="showAddProductForm" class="modal-overlay">
-<form class="modal-content" @submit.prevent="addUser">
+<form class="modal-content" >
   <h3>Add New Product</h3>
   <input v-model="newProduct.prodURL" type="text" placeholder="Product URL">
   <input v-model="newProduct.prodName" type="text" placeholder="Product Name">
   <input v-model="newProduct.prodDescription" type="text" placeholder="Description">
   <input v-model="newProduct.category" type="text" placeholder="Category">
-  <input v-model="newProduct.amount" type="text" placeholder="Price">
-  <input v-model="newProduct.quantity" type="text" placeholder="Quantity">
-  <button class="btn mt-1 mb-1" @click="addProduct">Submit</button>
+  <input v-model="newProduct.amount" type="number" placeholder="Price">
+  <input v-model="newProduct.quantity" type="number" placeholder="Quantity">
+  <button class="btn mt-1 mb-1" @click.prevent="addProduct">Submit</button>
   <button class="btn mt-1 mb-1" @click="showAddProductForm = false">Cancel</button>
 </form>
 </div>
@@ -125,15 +125,15 @@
 
 <!-- Update Product Modal -->
 <div v-if="showUpdateProductModal" class="modal-overlay">
-<form class="modal-content" @submit.prevent="updateUser">
+<form class="modal-content">
   <h3>Update Product</h3>
   <input v-model="currentProduct.prodURL" type="text" placeholder="Product URL">
   <input v-model="currentProduct.prodName" type="text" placeholder="Product Name">
   <input v-model="currentProduct.prodDescription" type="text" placeholder="Description">
   <input v-model="currentProduct.category" type="text" placeholder="Category">
-  <input v-model="currentProduct.amount" type="text" placeholder="Price">
-  <input v-model="currentProduct.quantity" type="text" placeholder="Quantity">
-  <button class="btn mt-1 mb-1" @click="updateProduct(currentProduct)">Save changes</button>
+  <input v-model="currentProduct.amount" type="number" placeholder="Price">
+  <input v-model="currentProduct.quantity" type="number" placeholder="Quantity">
+  <button class="btn mt-1 mb-1" @click.prevent="updateProduct(currentProduct)">Save changes</button>
   <button class="btn mt-1 mb-1" @click="closeUpdateProductModal">Cancel</button>
 </form>
 </div>
@@ -234,11 +234,12 @@ import { mapState, mapActions } from 'vuex'
       }
     },
     addProduct() {
+
       if (this.newProduct.prodURL && this.newProduct.prodName && this.newProduct.prodDescription && this.newProduct.category && this.newProduct.amount  && this.newProduct.quantity ) {
         this.$store.dispatch('addProduct', this.newProduct).then(() => {
           this.showAddProductForm = false;
-          this.newProduct = { prodURL: '', prodName: '', prodDescription: '', category: '',amount: '', quantity: '' };
-        });
+          this.newProduct = { prodURL: '', prodName: '', prodDescription: '', category: '', amount: '', quantity: '' };
+        }) ;
       } else {
         alert('Please fill in all fields.');
       }
